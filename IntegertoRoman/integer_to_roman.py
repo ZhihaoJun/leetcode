@@ -12,5 +12,7 @@ class Solution:
     # @return a string
     def intToRoman(self, num):
         num_str = str(num)
+        str_len = len(num_str)
         for i, n in enumerate(num_str):
             if n != '0':
+                10**(str_len-i)
