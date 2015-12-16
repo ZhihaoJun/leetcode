@@ -7,27 +7,32 @@ class TreeNode(object):
 
 
 class Solution(object):
+    def childCount(self, root):
+        if root is None:
+            return 0
+        if root.val in self.childs:
+            return self.childs[root.val]
+        return 1 + self.childCount(root.left) + self.childCount(root.right)
+
     def kthSmallest(self, root, k):
         """
         :type root: TreeNode
         :type k: int
         :rtype: int
         """
-        self.k = k
-        self.result = root.val
-        self.running = True
-        self.visit(root)
-        return self.result
-
-    def visit(self, root):
-        if root is None or not self.running:
-            return
-        self.visit(root.left)
-        self.k -= 1
-        if self.k == 0:
-            self.result = root.val
-            self.running = False
-        self.visit(root.right)
+        self.childs = {}
+        node = root
+        while node is not None:
+            count = self.childCount(node.left)
+            print(node.val, count)
+            if count + 1 == k:
+                return node.val
+            elif count + 1 > k:
+                node = node.left
+            else:
+                k -= count + 1
+                node = node.right
+        return -1
 
 
 def main():
@@ -50,7 +55,7 @@ def main():
     n3.right = n6
     root.left = n3
 
-    print(Solution().kthSmallest(root, 2))
+    print(Solution().kthSmallest(root, 7))
 
 if __name__ == "__main__":
     main()
