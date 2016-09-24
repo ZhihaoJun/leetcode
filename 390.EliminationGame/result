@@ -1,0 +1,5 @@
+0 [True, True, True, True, True, True, True, True, True, True, True, True]
+1 [False, True, False, True, False, True, False, True, False, True, False, True]
+[11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+2 [False, True, False, False, False, True, False, False, False, True, False, False]
+6
