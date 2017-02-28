@@ -30,7 +30,7 @@ TreeNode *BinaryTreeNodeParser::parse(string s) {
 void BinaryTreeNodeParser::transition(char c) {
     if (c == '[' && READY_STATE == state) {
         state = LEFT_BRACKET_STATE;
-    } else if (c >= '0' && c <= '9' && (LEFT_BRACKET_STATE == state || COMMA_STATE == state)) {
+    } else if ( (c == '-' || (c >= '0' && c <= '9') ) && (LEFT_BRACKET_STATE == state || COMMA_STATE == state)) {
         state = INT_DFA_STATE;
     } else if (c == 'n' && (LEFT_BRACKET_STATE == state || COMMA_STATE == state)) {
         state = NULL_DFA_STATE;
@@ -79,6 +79,12 @@ int IntDFA::parsedLen() {
 
 int IntDFA::parse(string::iterator it, string::iterator end) {
     int result = 0;
+    bool negative = false;
+    if (*it == '-') {
+        it ++;
+        len ++;
+        negative = true;
+    }
     while (it != end) {
         if (*it < '0' || *it > '9') {
             break;
@@ -86,6 +92,9 @@ int IntDFA::parse(string::iterator it, string::iterator end) {
         result = result * 10 + (*it - '0');
         it ++;
         len ++;
+    }
+    if (negative) {
+        return -result;
     }
     return result;
 }

@@ -13,7 +13,7 @@ void inorder(TreeNode *root) {
 }
 
 int main() {
-    string s("[1,2,30,null,4]");
+    string s("[1,2,30,null,-4]");
     BinaryTreeNodeParser parser;
     TreeNode *root = parser.parse(s);
     inorder(root);
