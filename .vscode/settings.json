@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "*.vue": "html",
+        "algorithm": "cpp"
+    }
+}
