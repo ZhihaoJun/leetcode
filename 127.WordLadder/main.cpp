@@ -4,18 +4,9 @@
 
 using namespace std;
 
-class LinkedNode {
-public:
-    LinkedNode(int val): val(val), next(NULL) {}
-
-    int val;
-    LinkedNode *next;
-};
-
-void printNode(LinkedNode *n) {
-    while (n != NULL) {
-        cout << n->val << " ";
-        n = n->next;
+void printNode(const vector<int> &edges) {
+    for (auto n : edges) {
+        cout << n << " ";
     }
     cout << endl;
 }
@@ -43,21 +34,14 @@ private:
         graph.resize(words.size());
 
         for (i=0; i<words.size(); ++i) {
-            LinkedNode *n = new LinkedNode(i);
             mapping[words[i]] = i;
-            graph[i] = n;
         }
         for (i=0; i<words.size(); ++i) {
             for (j=0; j<i; ++j) {
                 if (distance(words[i], words[j]) == 1) {
                     // add to graph
-                    LinkedNode *n1 = new LinkedNode(j);
-                    n1->next = graph[i]->next;
-                    graph[i]->next = n1;
-
-                    LinkedNode *n2 = new LinkedNode(i);
-                    n2->next = graph[j]->next;
-                    graph[j]->next = n2;
+                    graph[i].push_back(j);
+                    graph[j].push_back(i);
                 }
             }
         }
@@ -74,8 +58,8 @@ private:
     }
 
     int findShortestPath(int start, int end) {
-        vector<LinkedNode *>::size_type i = 0;
-        vector<LinkedNode *>::size_type j = 0;
+        vector< vector<int> >::size_type i = 0;
+        vector< vector<int> >::size_type j = 0;
         vector<int>::size_type k = 0;
         vector<int>::size_type minIdx = 0;
 
@@ -85,7 +69,6 @@ private:
             visited[i] = false;
         }
         dj[start] = 0;
-        LinkedNode *n = NULL;
 
         for (i=0; i<graph.size(); ++i) {
             minIdx = -1;
@@ -100,12 +83,11 @@ private:
             }
 
             visited[minIdx] = true;
-            n = graph[minIdx];
-            while (n != NULL) {
-                if (dj[n->val] == -1 || dj[minIdx] < dj[n->val] - 1) {
-                    dj[n->val] = dj[minIdx] + 1;
+            const vector<int> &edges = graph[minIdx];
+            for (auto n : edges) {
+                if (dj[n] == -1 || dj[minIdx] < dj[n] - 1) {
+                    dj[n] = dj[minIdx] + 1;
                 }
-                n = n->next;
             }
         }
 
@@ -113,16 +95,16 @@ private:
     }
 
     map<string, int> mapping;
-    vector<LinkedNode*> graph;
+    vector< vector<int> > graph;
     vector<int> dj;
     map<int, bool> visited;
 };
 
 int main() {
     Solution s;
-    string beginWord = "hot";
-    string endWord = "dog";
-    vector<string> vec = {"hot","dog"};
+    string beginWord = "a";
+    string endWord = "e";
+    vector<string> vec = {"b", "c", "d", "e"};
     cout << s.ladderLength(beginWord, endWord, vec) << endl;
     return 0;
 }
