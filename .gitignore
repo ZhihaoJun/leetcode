@@ -2,3 +2,4 @@ a.out
 *.pyc
 *.exe
 *.obj
+a.out.dSYM
