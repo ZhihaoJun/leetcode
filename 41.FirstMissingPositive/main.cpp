@@ -12,7 +12,8 @@ void printInts(const vector<int> &nums) {
 class Solution {
 public:
   int firstMissingPositive(vector<int>& nums) {
-    int i, target, n = nums.size(), t;
+    vector<int>::size_type i, target, t;
+    vector<int>::size_type n = nums.size();
     for (i=0; i<n; ++i) {
       target = nums[i];
       // move target to nums[target-1]

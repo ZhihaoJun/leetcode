@@ -102,9 +102,9 @@ private:
 
 int main() {
     Solution s;
-    string beginWord = "a";
-    string endWord = "e";
-    vector<string> vec = {"b", "c", "d", "e"};
+    string beginWord = "hit";
+    string endWord = "dog";
+    vector<string> vec = {"hot", "dog"};
     cout << s.ladderLength(beginWord, endWord, vec) << endl;
     return 0;
 }
