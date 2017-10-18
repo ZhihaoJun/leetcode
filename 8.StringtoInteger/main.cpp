@@ -32,7 +32,7 @@ public:
   }
 
 private:
-  int res;
+  unsigned int res;
   bool isNegative;
   bool large;
   int i;
@@ -75,9 +75,16 @@ private:
   }
 
   void pDigit() {
-    int tmp;
+    unsigned int tmp;
     if (isDigit(s[i])) {
       tmp = res * 10 + s[i] - '0';
+      // multiply overflow handle
+      // addition overflow handle
+      if (tmp > INT_MAX) {
+        large = true;
+      } else if (isNegative && tmp > -INT_MIN) {
+        large = true;
+      }
       res = tmp;
       ++i;
     }
@@ -88,6 +95,14 @@ private:
       return true;
     }
     return false;
+  }
+
+  bool isAddingOverflow(unsigned int max, unsigned int a, unsigned int b) {
+
+  }
+
+  bool isMultiplyingOverflow(unsigned int max, unsigned int a, unsigned int b) {
+    
   }
 };
 
@@ -109,7 +124,7 @@ int main() {
   cout << "1234567890123456789 " << s.myAtoi("1234567890123456789") << " " << (s.myAtoi("1234567890123456789") == 2147483647) << endl;
   cout << "-1234567890123456789 " << (s.myAtoi("-1234567890123456789") == -2147483648) << endl;
   cout << "2147483647 " << (s.myAtoi("2147483647") == 2147483647) << endl;
-  cout << "2147483648 " << (s.myAtoi("2147483648") == 2147483648) << endl;
+  cout << "2147483648 " << s.myAtoi("2147483648") << " " << (s.myAtoi("2147483648") == 2147483647) << endl;
   cout << "-2147483648 " << (s.myAtoi("-2147483648") == -2147483648) << endl;
   cout << "-2147483647 " << (s.myAtoi("-2147483647") == -2147483647) << endl;
   cout << "-2147483646 " << (s.myAtoi("-2147483646") == -2147483646) << endl;
