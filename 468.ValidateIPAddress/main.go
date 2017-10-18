@@ -5,22 +5,22 @@ import "log"
 /*
 IPv4 = v4Part . v4Part . v4Part . v4Part
 v4Part = 2 dmax5 dmax5
-			 = 2 digit
-			 = 2
-			 = 1 digit digit
-			 = 1 digit
-			 = 1
-			 = 0
-			 = 3 | 4 | 5 | 6 | 7 | 8 | 9 digit
-			 = 3 | 4 | 5 | 6 | 7 | 8 | 9
+       = 2 digit
+       = 2
+       = 1 digit digit
+       = 1 digit
+       = 1
+       = 0
+       = 3 | 4 | 5 | 6 | 7 | 8 | 9 digit
+       = 3 | 4 | 5 | 6 | 7 | 8 | 9
 dmax5 = 0 | 1 | 2 | 3 | 4 | 5
 digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 IPv6 = v6Part : v6Part : v6Part : v6Part : v6Part : v6Part : v6Part : v6Part
 v6Part = hex hex hex hex
-			 = hex hex hex
-			 = hex hex
-			 = hex
+       = hex hex hex
+       = hex hex
+       = hex
 hex = digit | a | b | c | d | e | f | A | B | C | D | E | F
 */
 
